@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Wanderer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Wanderer.java</span></div><h1>Wanderer.java</h1><pre class="source lang-java linenums">public class Wanderer
+{
+    private String id;
+    private String name;
+    private String username;
+    private String password;
+    private String status;
+    private int    level;
+    private int    exp;
+    private int    coins;
+
+    private String specialization; // combat | gathering | diplomacy 
+    private int    stamina;
+
+    public Wanderer(int idNumber, String name, String username, String password, String specialization)
+<span class="fc" id="L16">    {</span>
+<span class="fc" id="L17">        this.id       = &quot;P&quot; + idNumber;</span>
+<span class="fc" id="L18">        this.name     = name;</span>
+<span class="fc" id="L19">        this.username = username;</span>
+<span class="fc" id="L20">        this.password = password;</span>
+<span class="fc" id="L21">        this.status   = &quot;kosong&quot;;</span>
+<span class="fc" id="L22">        this.level    = 1;</span>
+<span class="fc" id="L23">        this.exp      = 0;</span>
+<span class="fc" id="L24">        this.coins    = 0;</span>
+
+<span class="fc" id="L26">        this.specialization = specialization;</span>
+<span class="fc" id="L27">        this.stamina        = 100;</span>
+<span class="fc" id="L28">    }</span>
+
+<span class="fc" id="L30">    public String getId() { return this.id; }</span>
+<span class="fc" id="L31">    public String getName() { return this.name; }</span>
+<span class="fc" id="L32">    public String getUsername() { return this.username; }</span>
+<span class="fc" id="L33">    public String getPassword() { return this.password; }</span>
+<span class="fc" id="L34">    public String getStatus() { return this.status; }</span>
+<span class="fc" id="L35">    public int    getLevel() { return this.level; }</span>
+<span class="fc" id="L36">    public int    getExp() { return this.exp; }</span>
+<span class="fc" id="L37">    public int    getCoins() { return this.coins; }</span>
+
+<span class="fc" id="L39">    public String getSpecialization() { return this.specialization; }</span>
+<span class="fc" id="L40">    public int    getStamina() { return this.stamina; }</span>
+
+    public void setStamina(int val) 
+    { 
+<span class="fc" id="L44">        this.stamina = val; </span>
+
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (this.stamina &gt; 100)</span>
+<span class="fc" id="L47">            this.stamina = 100;</span>
+<span class="fc" id="L48">    }</span>
+
+    public boolean isAvailable()
+    {
+<span class="fc" id="L52">        return this.status.equals(&quot;kosong&quot;);</span>
+    }
+
+    public boolean canTakeQuest(Quest quest)
+    {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        int req = quest.getDifficulty().equals(&quot;menengah&quot;) ? 6</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                  : quest.getDifficulty().equals(&quot;sulit&quot;)  ? 16</span>
+<span class="fc" id="L59">                                                           : 0;</span>
+
+<span class="fc bfc" id="L61" title="All 4 branches covered.">        return (this.level &gt;= req) &amp;&amp; quest.isAvailable();</span>
+    }
+
+    public boolean authenticate(String username, String password)
+    {
+<span class="fc bfc" id="L66" title="All 4 branches covered.">        if (this.username.equals(username) &amp;&amp; this.password.equals(password))</span>
+<span class="fc" id="L67">            return true;</span>
+
+<span class="fc" id="L69">        return false;</span>
+    }
+
+    public void startQuest()
+    {
+<span class="fc" id="L74">        this.status = &quot;dalam quest&quot;;</span>
+<span class="fc" id="L75">    }</span>
+
+    public static int getNextLevelExp(int currentLevel)
+    {
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (currentLevel == 1)</span>
+<span class="fc" id="L80">            return 5000;</span>
+<span class="fc" id="L81">        return 2 * getNextLevelExp(currentLevel - 1);</span>
+    }
+
+    public int getNextLevelExp()
+    {
+<span class="fc" id="L86">        return getNextLevelExp(this.level);</span>
+    }
+
+    public void completeQuest(int questExp, int questReward)
+    {
+<span class="fc" id="L91">        this.exp    += Math.min(this.exp + questExp, 1310720000);</span>
+<span class="fc" id="L92">        this.coins  += questReward;</span>
+<span class="fc" id="L93">        this.status  = &quot;kosong&quot;;</span>
+
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        while (this.exp &gt;= this.getNextLevelExp())</span>
+<span class="fc" id="L96">            this.level++;</span>
+<span class="fc" id="L97">    }</span>
+
+    public String getDisplayString()
+    {
+        // clang-format off
+<span class="fc" id="L102">        return </span>
+            &quot;ID pengembara:             &quot; + this.id       + &quot;\n&quot; + 
+            &quot;Name pengembara:           &quot; + this.name     + &quot;\n&quot; +
+            &quot;Username pengembara:       &quot; + this.username + &quot;\n&quot; +
+            &quot;Level pengembara:          &quot; + this.level    + &quot;\n&quot; +
+            &quot;Exp pengembara:            &quot; + this.exp      + &quot; poin exp\n&quot; +
+            &quot;Coin pengembara:           &quot; + this.coins    + &quot; koin\n&quot; +
+            &quot;Status pengembara:         &quot; + this.status         + &quot;\n&quot; +
+            &quot;Specialization pengembara: &quot; + this.specialization + &quot;\n&quot; +
+            &quot;Stamina:                   &quot; + this.stamina;
+        // clang-format on
+    }
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L118">        return getDisplayString();</span>
+    }
+
+    public static String[] validateWandererInput(GameManager gm, String name, String username, String password, String specialization)
+    {
+<span class="nc" id="L123">        String[] temp  = new String[7];</span>
+<span class="nc" id="L124">        int      count = 0;</span>
+
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        if (name.isEmpty())</span>
+<span class="nc" id="L127">            temp[count++] = (&quot;Nama pengembara tidak boleh kosong&quot;);</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (!name.matches(&quot;^[a-zA-Z ]+$&quot;))</span>
+<span class="nc" id="L129">            temp[count++] = (&quot;Nama pengembara hanya boleh terdiri dari huruf dan spasi&quot;);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        if (!name.matches(&quot;^([A-Z][a-z]*(\\s|$))+$&quot;))</span>
+<span class="nc" id="L131">            temp[count++] = (&quot;Huruf kapital hanya boleh digunakan di awal setiap kata&quot;);</span>
+
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        if (username.isEmpty())</span>
+<span class="nc" id="L134">            temp[count++] = (&quot;Username tidak boleh kosong&quot;);</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (!username.matches(&quot;^[a-zA-Z0-9_]+$&quot;))</span>
+<span class="nc" id="L136">            temp[count++] = (&quot;Username hanya boleh huruf, angka, dan underscore&quot;);</span>
+
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (password.isEmpty())</span>
+<span class="nc" id="L139">            temp[count++] = (&quot;Password tidak boleh kosong&quot;);</span>
+
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        if (gm.getWandererByUsername(username) != null)</span>
+<span class="nc" id="L142">            temp[count++] = (&quot;Username sudah pernah digunakan&quot;);</span>
+
+
+<span class="nc bnc" id="L145" title="All 6 branches missed.">        if (!specialization.equals(&quot;combat&quot;) &amp;&amp; !specialization.equals(&quot;gathering&quot;) &amp;&amp; !specialization.equals(&quot;diplomacy&quot;))</span>
+<span class="nc" id="L146">            temp[count++] = (&quot;Specialization pengembara harus: combat ATAU gathering ATAU diplomacy&quot;);</span>
+
+<span class="nc" id="L148">        String[] invalids = new String[count];</span>
+
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++)</span>
+<span class="nc" id="L151">            invalids[i] = temp[i];</span>
+
+<span class="nc" id="L153">        return invalids;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
