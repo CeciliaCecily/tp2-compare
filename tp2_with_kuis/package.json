@@ -1,0 +1,20 @@
+{
+  "name": "tp2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "clang-format -i src/main/*.java",
+    "check": "javac -Xlint:all -Werror -sourcepath src/main -d /tmp src/main/Main2506532643.java"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DDP2-Genap-2025-2026/tp2-genap-2526-RedStone576.git"
+  },
+  "author": "RedStone576",
+  "license": "Artistic-2.0",
+  "bugs": {
+    "url": "https://github.com/DDP2-Genap-2025-2026/tp2-genap-2526-RedStone576/issues"
+  },
+  "homepage": "https://github.com/DDP2-Genap-2025-2026/tp2-genap-2526-RedStone576#readme"
+}
