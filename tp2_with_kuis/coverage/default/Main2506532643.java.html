@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main2506532643.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Main2506532643.java</span></div><h1>Main2506532643.java</h1><pre class="source lang-java linenums">import java.util.Scanner;
+
+<span class="nc" id="L3">public class Main2506532643</span>
+{
+<span class="nc" id="L5">    private static final Scanner     input       = new Scanner(System.in);</span>
+<span class="nc" id="L6">    private static final GameManager gameManager = new GameManager();</span>
+
+    public static void main(String[] args) throws Exception
+    {
+<span class="nc" id="L10">        boolean fill  = false;</span>
+<span class="nc" id="L11">        boolean admin = false;</span>
+<span class="nc" id="L12">        String  user  = &quot;mugichan&quot;;</span>
+
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        for (int i = 0; i &lt; args.length; i++)</span>
+        {
+<span class="nc bnc" id="L16" title="All 2 branches missed.">            if (args[i].equals(&quot;--fill&quot;))</span>
+<span class="nc" id="L17">                fill = true;</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">            else if (args[i].equals(&quot;--admin&quot;))</span>
+<span class="nc" id="L19">                admin = true;</span>
+<span class="nc bnc" id="L20" title="All 4 branches missed.">            else if (args[i].equals(&quot;--user&quot;) &amp;&amp; i + 1 &lt; args.length)</span>
+<span class="nc" id="L21">                user = args[++i];</span>
+        }
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (fill)</span>
+        {
+<span class="nc" id="L26">            int id = 1;</span>
+
+<span class="nc" id="L28">            gameManager.addQuest(new Quest(id, &quot;selamatkan orang yang dipenjara&quot;, &quot;desc&quot;, &quot;mudah&quot;, 100 * id, 1000 * id, id++, &quot;combat&quot;));</span>
+<span class="nc" id="L29">            gameManager.addQuest(new Quest(id, &quot;quest_&quot; + id, &quot;desc&quot;, &quot;mudah&quot;, 100 * id, 1000 * id, id++, &quot;combat&quot;));</span>
+<span class="nc" id="L30">            gameManager.addQuest(new Quest(id, &quot;quest_&quot; + id, &quot;desc&quot;, &quot;menengah&quot;, 100 * id, 1000 * id, id++, &quot;combat&quot;));</span>
+<span class="nc" id="L31">            gameManager.addQuest(new Quest(id, &quot;quest_&quot; + id, &quot;desc&quot;, &quot;sulit&quot;, 100 * id, 1000 * id, id++, &quot;combat&quot;));</span>
+
+<span class="nc" id="L33">            gameManager.addWanderer(new Wanderer(1, &quot;Tsumugi Kotobuki&quot;, &quot;mugichan&quot;, &quot;cute&quot;, &quot;combat&quot;));</span>
+<span class="nc" id="L34">            gameManager.addWanderer(new Wanderer(2, &quot;Yui Hirasawa&quot;, &quot;yuichan&quot;, &quot;guitar123&quot;, &quot;combat&quot;));</span>
+<span class="nc" id="L35">            gameManager.addWanderer(new Wanderer(3, &quot;Mio Akiyama&quot;, &quot;miochan&quot;, &quot;cute&quot;, &quot;gathering&quot;));</span>
+<span class="nc" id="L36">            gameManager.addWanderer(new Wanderer(4, &quot;Ritsu Tainaka&quot;, &quot;ricchan&quot;, &quot;forehead&quot;, &quot;gathering&quot;));</span>
+<span class="nc" id="L37">            gameManager.addWanderer(new Wanderer(5, &quot;Azusa Nakano&quot;, &quot;azunyan&quot;, &quot;neko&quot;, &quot;diplomacy&quot;));;d();</span>
+        }
+
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (admin)</span>
+<span class="nc" id="L41">            adminMenu();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        else if (fill)</span>
+        {
+<span class="nc bnc" id="L44" title="All 2 branches missed.">            if (gameManager.getPrisonerByUsername(user) != null)</span>
+<span class="nc" id="L45">                prisonerMenu(user);</span>
+            else
+            {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                if (gameManager.getWandererByUsername(user) == null)</span>
+                {
+<span class="nc" id="L50">                    System.out.println(&quot;User tidak ditemukan&quot;);</span>
+<span class="nc" id="L51">                    return;</span>
+                }
+                else
+<span class="nc" id="L54">                    userMenu(user);</span>
+            }
+        }
+
+
+        /***/
+
+
+        // &quot;Himmel&quot;, &quot;himmel&quot;, &quot;pass123&quot;, &quot;combat&quot;
+        // &quot;Frieren&quot;, &quot;frieren&quot;, &quot;pass456&quot;, &quot;gathering&quot;
+        /***/
+
+<span class="nc" id="L66">        run();</span>
+<span class="nc" id="L67">    }</span>
+
+    public static void run()
+    {
+        while (true)
+        {
+<span class="nc" id="L73">            System.out.println(&quot;Hari ke-&quot; + gameManager.getDaysCount());</span>
+<span class="nc" id="L74">            System.out.println(&quot;1. Login&quot;);</span>
+<span class="nc" id="L75">            System.out.println(&quot;2. Exit&quot;);</span>
+<span class="nc" id="L76">            System.out.print(&quot;Input: &quot;);</span>
+
+<span class="nc" id="L78">            String choice = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L80" title="All 2 branches missed.">            if (choice.equals(&quot;1&quot;))</span>
+<span class="nc" id="L81">                handleLogin();</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            else if (choice.equals(&quot;2&quot;))</span>
+<span class="nc" id="L83">                break;</span>
+            else
+<span class="nc" id="L85">                System.out.println(&quot;Input tidak valid!&quot;);</span>
+<span class="nc" id="L86">        }</span>
+<span class="nc" id="L87">    }</span>
+
+    public static void handleLogin()
+    {
+<span class="nc" id="L91">        System.out.print(&quot;Username: &quot;);</span>
+<span class="nc" id="L92">        String username = input.nextLine().trim();</span>
+
+<span class="nc" id="L94">        System.out.print(&quot;Password: &quot;);</span>
+<span class="nc" id="L95">        String password = input.nextLine().trim();</span>
+
+        /*
+         * [subtask 7]
+         * sembunyikan password setelah di-input
+         **/
+
+<span class="nc" id="L102">        System.out.print(&quot;\033[1A&quot;);</span>
+<span class="nc" id="L103">        System.out.print(&quot;\033[2K&quot;);</span>
+<span class="nc" id="L104">        System.out.println(&quot;Password: &quot;</span>
+<span class="nc" id="L105">                           + &quot;*&quot;.repeat(password.length()));</span>
+
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (gameManager.isAdmin(username, password))</span>
+        {
+<span class="nc" id="L109">            System.out.println(&quot;Login berhasil sebagai Admin.&quot;);</span>
+<span class="nc" id="L110">            adminMenu();</span>
+        }
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        else if (gameManager.isUser(username, password))</span>
+        {
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            if (gameManager.isPrisoner(username))</span>
+            {
+<span class="nc" id="L117">                System.out.println(&quot;Login berhasil sebagai tahanan.&quot;);</span>
+<span class="nc" id="L118">                prisonerMenu(username);</span>
+            }
+
+            else
+            {
+<span class="nc" id="L123">                System.out.println(&quot;Login berhasil sebagai User.&quot;);</span>
+<span class="nc" id="L124">                userMenu(username);</span>
+            }
+        }
+
+        else
+<span class="nc" id="L129">            System.out.println(&quot;Username atau password salah.&quot;);</span>
+<span class="nc" id="L130">    }</span>
+
+    public static void adminMenu()
+    {
+        while (true)
+        {
+<span class="nc" id="L136">            System.out.println(&quot;\nMenu Atmint (Hari ke-&quot; + gameManager.getDaysCount() + &quot;)&quot;);</span>
+<span class="nc" id="L137">            System.out.println(&quot;1. Lihat daftar quest&quot;);</span>
+<span class="nc" id="L138">            System.out.println(&quot;2. Lihat daftar pengembara&quot;);</span>
+<span class="nc" id="L139">            System.out.println(&quot;3. Tambah quest&quot;);</span>
+<span class="nc" id="L140">            System.out.println(&quot;4. Tambah pengembara&quot;);</span>
+<span class="nc" id="L141">            System.out.println(&quot;5. Filter daftar quest&quot;);</span>
+<span class="nc" id="L142">            System.out.println(&quot;6. Filter daftar pengembara&quot;);</span>
+<span class="nc" id="L143">            System.out.println(&quot;7. Tampilkan daftar quest terurut&quot;);</span>
+<span class="nc" id="L144">            System.out.println(&quot;8. Tampilkan daftar pengembara terurut&quot;);</span>
+<span class="nc" id="L145">            System.out.println(&quot;9. Lanjut ke hari berikutnya&quot;);</span>
+<span class="nc" id="L146">            System.out.println(&quot;10. Tampilkan daftar pengembara yang kelelahan&quot;);</span>
+<span class="nc" id="L147">            System.out.println(&quot;0. Keluar&quot;);</span>
+
+<span class="nc" id="L149">            System.out.print(&quot;Input: &quot;);</span>
+
+<span class="nc bnc" id="L151" title="All 12 branches missed.">            switch (input.nextLine().trim())</span>
+            {
+<span class="nc" id="L153">                case &quot;1&quot; -&gt; helperShowQuests(gameManager.getQuests(), gameManager.getQuestCount());</span>
+<span class="nc" id="L154">                case &quot;2&quot; -&gt; helperShowWanderers(gameManager.getWanderers(), gameManager.getWandererCount());</span>
+<span class="nc" id="L155">                case &quot;3&quot; -&gt; helperInputQuest();</span>
+<span class="nc" id="L156">                case &quot;4&quot; -&gt; helperInputWanderer();</span>
+<span class="nc" id="L157">                case &quot;5&quot; -&gt; helperInputQuestFilter();</span>
+<span class="nc" id="L158">                case &quot;6&quot; -&gt; helperInputWandererFilter();</span>
+<span class="nc" id="L159">                case &quot;7&quot; -&gt; helperInputQuestSorting();</span>
+<span class="nc" id="L160">                case &quot;8&quot; -&gt; helperInputWandererSorting();</span>
+                case &quot;9&quot; -&gt;
+                    {
+<span class="nc" id="L163">                        Quest[] completedQuestList = gameManager.nextDay();</span>
+
+<span class="nc" id="L165">                        System.out.println(&quot;Berganti ke hari ke-&quot; + gameManager.getDaysCount());</span>
+
+<span class="nc bnc" id="L167" title="All 2 branches missed.">                        for (int i = 0; i &lt; completedQuestList.length; i++)</span>
+                        {
+<span class="nc bnc" id="L169" title="All 2 branches missed.">                            if (completedQuestList[i] == null)</span>
+<span class="nc" id="L170">                                break;</span>
+
+<span class="nc" id="L172">                            System.out.println(completedQuestList[i]);</span>
+                        }
+<span class="nc" id="L174">                    }</span>
+                case &quot;10&quot; -&gt;
+                    {
+                        // kuis soal 3
+<span class="nc" id="L178">                        Wanderer[] filtered = gameManager.getTiredWanderers();</span>
+<span class="nc" id="L179">                        helperShowWanderers(filtered, filtered.length);</span>
+<span class="nc" id="L180">                    }</span>
+                case &quot;0&quot; -&gt;
+                    {
+<span class="nc" id="L183">                        return;</span>
+                    }
+<span class="nc" id="L185">                default -&gt; System.out.println(&quot;Input tidak valid!&quot;);</span>
+<span class="nc" id="L186">            }</span>
+        }
+    }
+
+    private static void userMenu(String username)
+    {
+        while (true)
+        {
+<span class="nc" id="L194">            Wanderer currentWanderer = gameManager.getWandererByUsername(username);</span>
+
+<span class="nc" id="L196">            System.out.println(&quot;Menu pengembara: &quot; + currentWanderer.getName() + &quot; (Hari ke-&quot; + gameManager.getDaysCount() + &quot;)&quot;);</span>
+<span class="nc" id="L197">            System.out.println(&quot;1. Lihat data diri&quot;);</span>
+<span class="nc" id="L198">            System.out.println(&quot;2. Lihat daftar quest&quot;);</span>
+<span class="nc" id="L199">            System.out.println(&quot;3. Filter daftar quest&quot;);</span>
+<span class="nc" id="L200">            System.out.println(&quot;4. Tampilkan daftar quest terurut&quot;);</span>
+<span class="nc" id="L201">            System.out.println(&quot;5. Ambil quest&quot;);</span>
+<span class="nc" id="L202">            System.out.println(&quot;0. Keluar&quot;);</span>
+
+<span class="nc" id="L204">            System.out.print(&quot;Input: &quot;);</span>
+
+<span class="nc bnc" id="L206" title="All 7 branches missed.">            switch (input.nextLine().trim())</span>
+            {
+<span class="nc" id="L208">                case &quot;1&quot; -&gt; System.out.println(currentWanderer.getDisplayString());</span>
+<span class="nc" id="L209">                case &quot;2&quot; -&gt; helperShowQuests(gameManager.getQuests(), gameManager.getQuestCount());</span>
+<span class="nc" id="L210">                case &quot;3&quot; -&gt; helperInputQuestFilter();</span>
+<span class="nc" id="L211">                case &quot;4&quot; -&gt; helperInputQuestSorting();</span>
+<span class="nc" id="L212">                case &quot;5&quot; -&gt; helperInputTakeQuest(currentWanderer);</span>
+                case &quot;0&quot; -&gt;
+                    {
+<span class="nc" id="L215">                        return;</span>
+                    }
+<span class="nc" id="L217">                default -&gt; System.out.println(&quot;Input tidak valid!&quot;);</span>
+            }
+<span class="nc" id="L219">        }</span>
+    }
+
+    private static void prisonerMenu(String username)
+    {
+        while (true)
+        {
+<span class="nc" id="L226">            Wanderer currentWanderer = gameManager.getWandererByUsername(username);</span>
+<span class="nc" id="L227">            String[] prisoner        = gameManager.getPrisonerByUsername(username);</span>
+
+<span class="nc" id="L229">            System.out.println(&quot;Menu tahanan penjara: &quot; + currentWanderer.getName() + &quot; (Hari ke-&quot; + gameManager.getDaysCount() + &quot;)&quot;);</span>
+<span class="nc" id="L230">            System.out.println(&quot;1. Lihat data tahanan&quot;);</span>
+<span class="nc" id="L231">            System.out.println(&quot;0. Keluar&quot;);</span>
+
+<span class="nc" id="L233">            System.out.print(&quot;Input: &quot;);</span>
+
+<span class="nc bnc" id="L235" title="All 3 branches missed.">            switch (input.nextLine().trim())</span>
+            {
+                case &quot;1&quot; -&gt;
+                    {
+<span class="nc" id="L239">                        System.out.println(&quot;Nama:                &quot; + currentWanderer.getName());</span>
+<span class="nc" id="L240">                        System.out.println(&quot;Alasan dipenjara:    &quot; + prisoner[1]);</span>
+<span class="nc" id="L241">                        System.out.println(&quot;Durasi dipenjara:    &quot; + prisoner[2] + &quot; tahun&quot;);</span>
+<span class="nc" id="L242">                        System.out.println();</span>
+                        // System.out.println(&quot;Sisa hari dipenjara: &quot; + (Integer.parseInt(prisoner[3]) + Integer.parseInt(prisoner[2]) - gameManager.getDaysCount()) + &quot; hari&quot;);
+<span class="nc" id="L244">                    }</span>
+
+                case &quot;0&quot; -&gt;
+                    {
+<span class="nc" id="L248">                        return;</span>
+                    }
+<span class="nc" id="L250">                default -&gt; System.out.println(&quot;Input tidak valid!&quot;);</span>
+            }
+<span class="nc" id="L252">        }</span>
+    }
+
+    private static void helperShowQuests(Quest[] quests, int questCount)
+    {
+<span class="nc bnc" id="L257" title="All 2 branches missed.">        if (questCount == 0)</span>
+        {
+<span class="nc" id="L259">            System.out.println(&quot;Tidak ditemukan adanya quest.&quot;);</span>
+<span class="nc" id="L260">            return;</span>
+        }
+
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        for (int i = 0; i &lt; questCount; i++)</span>
+        {
+<span class="nc bnc" id="L265" title="All 2 branches missed.">            if (quests[i] == null)</span>
+<span class="nc" id="L266">                break;</span>
+
+<span class="nc" id="L268">            System.out.println((i + 1) + &quot;.\n&quot; + quests[i] + &quot;\n\n&quot;);</span>
+        }
+<span class="nc" id="L270">    }</span>
+
+    private static void helperShowWanderers(Wanderer[] wanderers, int wandererCount)
+    {
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        if (wandererCount == 0)</span>
+        {
+<span class="nc" id="L276">            System.out.println(&quot;Tidak ditemukan adanya wanderer.&quot;);</span>
+<span class="nc" id="L277">            return;</span>
+        }
+
+<span class="nc bnc" id="L280" title="All 2 branches missed.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="nc bnc" id="L282" title="All 2 branches missed.">            if (wanderers[i] == null)</span>
+<span class="nc" id="L283">                break;</span>
+
+<span class="nc" id="L285">            System.out.println((i + 1) + &quot;.\n&quot; + wanderers[i] + &quot;\n\n&quot;);</span>
+        }
+<span class="nc" id="L287">    }</span>
+
+    /* quest filtering */
+    // i dont know if filtering and sorting is considered a bussiness logic but its mainly just for displays so...
+
+    public static Quest[] HelperFilterQuestStatus(String status)
+    {
+<span class="nc" id="L294">        Quest[] quests     = gameManager.getQuests();</span>
+<span class="nc" id="L295">        int     questCount = gameManager.getQuestCount();</span>
+
+<span class="nc bnc" id="L297" title="All 2 branches missed.">        if (questCount == 0)</span>
+<span class="nc" id="L298">            return new Quest[0];</span>
+
+<span class="nc" id="L300">        Quest[] filtered      = new Quest[1000];</span>
+<span class="nc" id="L301">        int     filteredCount = 0;</span>
+
+<span class="nc bnc" id="L303" title="All 2 branches missed.">        for (int i = 0; i &lt; questCount; i++)</span>
+        {
+<span class="nc bnc" id="L305" title="All 2 branches missed.">            if (quests[i].getStatus().equals(status))</span>
+<span class="nc" id="L306">                filtered[filteredCount++] = quests[i];</span>
+        }
+
+<span class="nc bnc" id="L309" title="All 2 branches missed.">        return filteredCount == 0 ? new Quest[0] : filtered;</span>
+    }
+
+    public static Quest[] HelperFilterQuestDifficulty(String diff)
+    {
+<span class="nc" id="L314">        Quest[] quests     = gameManager.getQuests();</span>
+<span class="nc" id="L315">        int     questCount = gameManager.getQuestCount();</span>
+
+<span class="nc bnc" id="L317" title="All 2 branches missed.">        if (questCount == 0)</span>
+<span class="nc" id="L318">            return new Quest[0];</span>
+
+<span class="nc" id="L320">        Quest[] filtered      = new Quest[1000];</span>
+<span class="nc" id="L321">        int     filteredCount = 0;</span>
+
+<span class="nc bnc" id="L323" title="All 2 branches missed.">        for (int i = 0; i &lt; questCount; i++)</span>
+        {
+<span class="nc bnc" id="L325" title="All 2 branches missed.">            if (quests[i].getDifficulty().equals(diff))</span>
+<span class="nc" id="L326">                filtered[filteredCount++] = quests[i];</span>
+        }
+
+<span class="nc bnc" id="L329" title="All 2 branches missed.">        return filteredCount == 0 ? new Quest[0] : filtered;</span>
+    }
+
+    /* wanderer filtering */
+
+    public static Wanderer[] HelperFilterWandererStatus(String status)
+    {
+<span class="nc" id="L336">        Wanderer[] wanderers     = gameManager.getWanderers();</span>
+<span class="nc" id="L337">        int        wandererCount = gameManager.getWandererCount();</span>
+
+<span class="nc bnc" id="L339" title="All 2 branches missed.">        if (wandererCount == 0)</span>
+<span class="nc" id="L340">            return new Wanderer[0];</span>
+
+<span class="nc" id="L342">        Wanderer[] filtered      = new Wanderer[1000];</span>
+<span class="nc" id="L343">        int        filteredCount = 0;</span>
+
+<span class="nc bnc" id="L345" title="All 2 branches missed.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="nc bnc" id="L347" title="All 2 branches missed.">            if (wanderers[i].getStatus().equals(status))</span>
+<span class="nc" id="L348">                filtered[filteredCount++] = wanderers[i];</span>
+        }
+
+<span class="nc bnc" id="L351" title="All 2 branches missed.">        return filteredCount == 0 ? new Wanderer[0] : filtered;</span>
+    }
+
+    public static Wanderer[] HelperFilterWandererLevel(int upper, int lower)
+    {
+<span class="nc" id="L356">        Wanderer[] wanderers     = gameManager.getWanderers();</span>
+<span class="nc" id="L357">        int        wandererCount = gameManager.getWandererCount();</span>
+
+<span class="nc bnc" id="L359" title="All 2 branches missed.">        if (wandererCount == 0)</span>
+<span class="nc" id="L360">            return new Wanderer[0];</span>
+
+<span class="nc" id="L362">        Wanderer[] filtered      = new Wanderer[1000];</span>
+<span class="nc" id="L363">        int        filteredCount = 0;</span>
+
+<span class="nc bnc" id="L365" title="All 2 branches missed.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="nc bnc" id="L367" title="All 4 branches missed.">            if (wanderers[i].getLevel() &gt;= lower &amp;&amp; wanderers[i].getLevel() &lt;= upper)</span>
+<span class="nc" id="L368">                filtered[filteredCount++] = wanderers[i];</span>
+        }
+
+<span class="nc bnc" id="L371" title="All 2 branches missed.">        return filteredCount == 0 ? new Wanderer[0] : filtered;</span>
+    }
+
+    /* quest sorting */
+    // clang-format off
+    public static Quest[] HelperSortQuestDifficulty(boolean asc)
+    {
+<span class="nc" id="L378">        Quest[] quests     = gameManager.getQuests();</span>
+<span class="nc" id="L379">        int     questCount = gameManager.getQuestCount();</span>
+
+<span class="nc bnc" id="L381" title="All 2 branches missed.">        if (questCount == 0) return new Quest[0];</span>
+
+<span class="nc" id="L383">        Quest[] filteredEasy      = new Quest[1000];</span>
+<span class="nc" id="L384">        int     filteredEasyCount = 0;</span>
+
+<span class="nc" id="L386">        Quest[] filteredMid      = new Quest[1000];</span>
+<span class="nc" id="L387">        int     filteredMidCount = 0;</span>
+
+<span class="nc" id="L389">        Quest[] filteredHard      = new Quest[1000];</span>
+<span class="nc" id="L390">        int     filteredHardCount = 0;</span>
+
+<span class="nc bnc" id="L392" title="All 2 branches missed.">        for (int i = 0; i &lt; questCount; i++)</span>
+        {
+<span class="nc bnc" id="L394" title="All 4 branches missed.">            switch (quests[i].getDifficulty())</span>
+            {
+<span class="nc" id="L396">                case &quot;mudah&quot;    -&gt; filteredEasy[filteredEasyCount++] = quests[i];</span>
+<span class="nc" id="L397">                case &quot;menengah&quot; -&gt; filteredMid[filteredMidCount++]   = quests[i];</span>
+<span class="nc" id="L398">                case &quot;sulit&quot;    -&gt; filteredHard[filteredHardCount++] = quests[i];</span>
+            }
+        }
+
+<span class="nc" id="L402">        Quest[] merged      = new Quest[filteredEasyCount + filteredMidCount + filteredHardCount];</span>
+<span class="nc" id="L403">        int     mergedCount = 0;</span>
+
+<span class="nc bnc" id="L405" title="All 2 branches missed.">        if (asc)</span>
+        {
+<span class="nc bnc" id="L407" title="All 2 branches missed.">            for (int i = 0; i &lt; filteredEasyCount; i++) merged[mergedCount++] = filteredEasy[i];</span>
+<span class="nc bnc" id="L408" title="All 2 branches missed.">            for (int i = 0; i &lt; filteredMidCount;  i++) merged[mergedCount++] = filteredMid[i];</span>
+<span class="nc bnc" id="L409" title="All 2 branches missed.">            for (int i = 0; i &lt; filteredHardCount; i++) merged[mergedCount++] = filteredHard[i];</span>
+        }
+
+        else
+        {
+<span class="nc bnc" id="L414" title="All 2 branches missed.">            for (int i = 0; i &lt; filteredHardCount; i++) merged[mergedCount++] = filteredHard[i];</span>
+<span class="nc bnc" id="L415" title="All 2 branches missed.">            for (int i = 0; i &lt; filteredMidCount;  i++) merged[mergedCount++] = filteredMid[i];</span>
+<span class="nc bnc" id="L416" title="All 2 branches missed.">            for (int i = 0; i &lt; filteredEasyCount; i++) merged[mergedCount++] = filteredEasy[i];</span>
+        }
+
+<span class="nc bnc" id="L419" title="All 2 branches missed.">        return mergedCount == 0 ? new Quest[0] : merged;</span>
+    }
+
+    public static Quest[] HelperSortQuestReward(boolean asc)
+    {
+<span class="nc" id="L424">        Quest[] quests     = gameManager.getQuests();</span>
+<span class="nc" id="L425">        int     questCount = gameManager.getQuestCount();</span>
+
+<span class="nc bnc" id="L427" title="All 2 branches missed.">        if (questCount == 0) return new Quest[0];</span>
+
+<span class="nc" id="L429">        Quest[] sorted = new Quest[questCount];</span>
+        
+<span class="nc bnc" id="L431" title="All 2 branches missed.">        for (int i = 0; i &lt; questCount; i++)</span>
+        {
+<span class="nc" id="L433">            sorted[i] = quests[i];</span>
+        }
+
+        // its sooooo uglyyyyyyyyyyyyyyyyyyyyyyyy broooooooooooooooooooo
+<span class="nc bnc" id="L437" title="All 2 branches missed.">        for (int gap = questCount / 2; gap &gt; 0; gap /= 2)</span>
+        {
+<span class="nc bnc" id="L439" title="All 2 branches missed.">            for (int i = gap; i &lt; questCount; i++)</span>
+            {
+<span class="nc" id="L441">                Quest key = sorted[i];</span>
+<span class="nc" id="L442">                int   j   = i;</span>
+
+<span class="nc bnc" id="L444" title="All 4 branches missed.">                while (j &gt;= gap </span>
+<span class="nc bnc" id="L445" title="All 2 branches missed.">                    &amp;&amp; (asc ? sorted[j - gap].getReward() &gt; key.getReward()</span>
+<span class="nc bnc" id="L446" title="All 2 branches missed.">                            : sorted[j - gap].getReward() &lt; key.getReward()</span>
+                ))
+                {
+<span class="nc" id="L449">                    sorted[j] = sorted[j - gap];</span>
+<span class="nc" id="L450">                    j -= gap;</span>
+                }
+<span class="nc" id="L452">                sorted[j] = key;</span>
+            }
+        }
+
+<span class="nc" id="L456">        return sorted;</span>
+    }
+
+
+    public static Wanderer[] HelperSortWandererName(boolean asc)
+    {
+<span class="nc" id="L462">        Wanderer[] Wanderers     = gameManager.getWanderers();</span>
+<span class="nc" id="L463">        int        wandererCount = gameManager.getWandererCount();</span>
+
+<span class="nc bnc" id="L465" title="All 2 branches missed.">        if (wandererCount == 0) return new Wanderer[0];</span>
+
+<span class="nc" id="L467">        Wanderer[] sorted = new Wanderer[wandererCount];</span>
+        
+<span class="nc bnc" id="L469" title="All 2 branches missed.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="nc" id="L471">            sorted[i] = Wanderers[i];</span>
+        }
+
+<span class="nc bnc" id="L474" title="All 2 branches missed.">        for (int gap = wandererCount / 2; gap &gt; 0; gap /= 2)</span>
+        {
+<span class="nc bnc" id="L476" title="All 2 branches missed.">            for (int i = gap; i &lt; wandererCount; i++)</span>
+            {
+<span class="nc" id="L478">                Wanderer key = sorted[i];</span>
+<span class="nc" id="L479">                int   j      = i;</span>
+
+<span class="nc bnc" id="L481" title="All 4 branches missed.">                while (j &gt;= gap </span>
+<span class="nc bnc" id="L482" title="All 2 branches missed.">                    &amp;&amp; (asc ? sorted[j - gap].getName().compareToIgnoreCase(key.getName()) &gt; 0</span>
+<span class="nc bnc" id="L483" title="All 2 branches missed.">                            : sorted[j - gap].getName().compareToIgnoreCase(key.getName()) &lt; 0</span>
+                ))
+                {
+<span class="nc" id="L486">                    sorted[j] = sorted[j - gap];</span>
+<span class="nc" id="L487">                    j -= gap;</span>
+                }
+<span class="nc" id="L489">                sorted[j] = key;</span>
+            }
+        }
+
+<span class="nc" id="L493">        return sorted;</span>
+    }
+
+    public static Wanderer[] HelperSortWandererLevel(boolean asc)
+    {
+<span class="nc" id="L498">        Wanderer[] Wanderers     = gameManager.getWanderers();</span>
+<span class="nc" id="L499">        int        wandererCount = gameManager.getWandererCount();</span>
+
+<span class="nc bnc" id="L501" title="All 2 branches missed.">        if (wandererCount == 0) return new Wanderer[0];</span>
+
+<span class="nc" id="L503">        Wanderer[] sorted = new Wanderer[wandererCount];</span>
+        
+<span class="nc bnc" id="L505" title="All 2 branches missed.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="nc" id="L507">            sorted[i] = Wanderers[i];</span>
+        }
+
+<span class="nc bnc" id="L510" title="All 2 branches missed.">        for (int gap = wandererCount / 2; gap &gt; 0; gap /= 2)</span>
+        {
+<span class="nc bnc" id="L512" title="All 2 branches missed.">            for (int i = gap; i &lt; wandererCount; i++)</span>
+            {
+<span class="nc" id="L514">                Wanderer key = sorted[i];</span>
+<span class="nc" id="L515">                int   j      = i;</span>
+
+<span class="nc bnc" id="L517" title="All 4 branches missed.">                while (j &gt;= gap </span>
+<span class="nc bnc" id="L518" title="All 2 branches missed.">                    &amp;&amp; (asc ? sorted[j - gap].getLevel() &gt; key.getLevel()</span>
+<span class="nc bnc" id="L519" title="All 2 branches missed.">                            : sorted[j - gap].getLevel() &lt; key.getLevel()</span>
+                ))
+                {
+<span class="nc" id="L522">                    sorted[j] = sorted[j - gap];</span>
+<span class="nc" id="L523">                    j -= gap;</span>
+                }
+<span class="nc" id="L525">                sorted[j] = key;</span>
+            }
+        }
+
+<span class="nc" id="L529">        return sorted;</span>
+    }
+    // clang-format on
+
+    private static void helperInputQuest()
+    {
+        while (true)
+        {
+<span class="nc" id="L537">            System.out.print(&quot;Masukan nama quest: &quot;);</span>
+<span class="nc" id="L538">            String name = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L540" title="All 2 branches missed.">            if (name.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L541">                break;</span>
+
+<span class="nc" id="L543">            System.out.print(&quot;Deskripsi quest: &quot;);</span>
+<span class="nc" id="L544">            String desc = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L546" title="All 2 branches missed.">            if (desc.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L547">                break;</span>
+
+<span class="nc" id="L549">            System.out.print(&quot;Reward quest: &quot;);</span>
+<span class="nc" id="L550">            String reward = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L552" title="All 2 branches missed.">            if (reward.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L553">                break;</span>
+
+<span class="nc" id="L555">            System.out.print(&quot;Bonus koin: &quot;);</span>
+<span class="nc" id="L556">            String bonus = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L558" title="All 2 branches missed.">            if (bonus.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L559">                break;</span>
+
+<span class="nc" id="L561">            System.out.print(&quot;Difficulty: &quot;);</span>
+<span class="nc" id="L562">            String difficulty = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L564" title="All 2 branches missed.">            if (difficulty.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L565">                break;</span>
+
+<span class="nc" id="L567">            System.out.print(&quot;Durasi quest: &quot;);</span>
+<span class="nc" id="L568">            String duration = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L570" title="All 2 branches missed.">            if (duration.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L571">                break;</span>
+
+<span class="nc" id="L573">            System.out.print(&quot;Tipe quest (combat | gathering | diplomacy): &quot;);</span>
+<span class="nc" id="L574">            String type = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L576" title="All 2 branches missed.">            if (type.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L577">                break;</span>
+
+<span class="nc" id="L579">            String[] invalids = Quest.validateQuestInput(name, desc, reward, bonus, difficulty, duration, type);</span>
+
+<span class="nc bnc" id="L581" title="All 2 branches missed.">            if (invalids.length &gt; 0)</span>
+            {
+<span class="nc bnc" id="L583" title="All 2 branches missed.">                for (int i = 0; i &lt; invalids.length; i++)</span>
+<span class="nc" id="L584">                    System.out.println(&quot;[!] &quot; + invalids[i]);</span>
+
+<span class="nc" id="L586">                System.out.println(&quot;Mengulangi seeding...&quot;);</span>
+                    
+<span class="nc" id="L588">                continue;</span>
+            }
+
+            else
+            {
+<span class="nc" id="L593">                gameManager.addQuest(</span>
+                    new Quest(
+<span class="nc" id="L595">                        gameManager.getQuestCount() + 1,</span>
+                        name,
+                        desc,
+                        difficulty,
+<span class="nc" id="L599">                        Integer.parseInt(reward),</span>
+<span class="nc" id="L600">                        Integer.parseInt(bonus),</span>
+<span class="nc" id="L601">                        Integer.parseInt(duration),</span>
+                        type
+                ));
+
+<span class="nc" id="L605">                System.out.println(&quot;Berhasil menambahkan quest!&quot;);</span>
+
+<span class="nc" id="L607">                break;</span>
+            }
+        }
+<span class="nc" id="L610">    }</span>
+
+    private static void helperInputWanderer()
+    {
+        while (true)
+        {
+<span class="nc" id="L616">            System.out.println(&quot;Masukan \&quot;x\&quot; untuk membatalkan aksi dan kembali ke menu.&quot;);</span>
+
+<span class="nc" id="L618">            System.out.print(&quot;Masukan nama pengembara: &quot;);</span>
+<span class="nc" id="L619">            String name = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L621" title="All 2 branches missed.">            if (name.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L622">                break;</span>
+
+<span class="nc" id="L624">            System.out.print(&quot;Masukan username pengembara: &quot;);</span>
+<span class="nc" id="L625">            String username = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L627" title="All 2 branches missed.">            if (username.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L628">                break;</span>
+
+<span class="nc" id="L630">            System.out.print(&quot;Masukan password: &quot;);</span>
+<span class="nc" id="L631">            String password = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L633" title="All 2 branches missed.">            if (password.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L634">                break;</span>
+
+<span class="nc" id="L636">            System.out.print(&quot;\033[1A&quot;);</span>
+<span class="nc" id="L637">            System.out.print(&quot;\033[2K&quot;);</span>
+<span class="nc" id="L638">            System.out.println(&quot;Masukan password: &quot;</span>
+<span class="nc" id="L639">                               + &quot;*&quot;.repeat(password.length()));</span>
+
+<span class="nc" id="L641">            System.out.print(&quot;Masukan specialization: &quot;);</span>
+<span class="nc" id="L642">            String specialization = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L644" title="All 2 branches missed.">            if (specialization.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L645">                break;</span>
+
+<span class="nc" id="L647">            String[] invalids = Wanderer.validateWandererInput(gameManager, name, username, password, specialization);</span>
+
+<span class="nc bnc" id="L649" title="All 2 branches missed.">            if (invalids.length &gt; 0)</span>
+            {
+<span class="nc bnc" id="L651" title="All 2 branches missed.">                for (int i = 0; i &lt; invalids.length; i++)</span>
+<span class="nc" id="L652">                    System.out.println(&quot;[!] &quot; + invalids[i]);</span>
+
+<span class="nc" id="L654">                System.out.println(&quot;Mengulangi seeding...&quot;);</span>
+                    
+<span class="nc" id="L656">                continue;</span>
+            }
+
+            else
+            {
+<span class="nc" id="L661">                gameManager.addWanderer(</span>
+                    new Wanderer(
+<span class="nc" id="L663">                        gameManager.getWandererCount() + 1,</span>
+                        name,
+                        username,
+                        password,
+                        specialization
+                    ));
+
+<span class="nc" id="L670">                System.out.println(&quot;Berhasil menambahkan pengembara&quot;);</span>
+
+<span class="nc" id="L672">                break;</span>
+            }
+        }
+<span class="nc" id="L675">    }</span>
+
+    private static void helperInputTakeQuest(Wanderer wanderer)
+    {
+        while (true)
+        {
+<span class="nc" id="L681">            System.out.println(&quot;Masukan \&quot;x\&quot; untuk membatalkan aksi dan kembali ke menu.\n&quot;);</span>
+
+<span class="nc" id="L683">            System.out.print(&quot;Masukan id quest: &quot;);</span>
+<span class="nc" id="L684">            String id = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L686" title="All 2 branches missed.">            if (id.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L687">                break;</span>
+
+<span class="nc bnc" id="L689" title="All 2 branches missed.">            if (gameManager.getQuestById(id) == null)</span>
+            {
+<span class="nc" id="L691">                System.out.println(&quot;Quest tidak ditemukan!&quot;);</span>
+<span class="nc" id="L692">                continue;</span>
+            }
+
+<span class="nc bnc" id="L695" title="All 2 branches missed.">            if (gameManager.takeQuest(gameManager.getQuestById(id), wanderer))</span>
+            {
+<span class="nc" id="L697">                System.out.println(&quot;Berhasil mengambil quest!&quot;);</span>
+<span class="nc" id="L698">                break;</span>
+            }
+            else
+<span class="nc" id="L701">                System.out.println(&quot;Gagal mengambil quest!\nMengulangi pengambilan...\n&quot;);</span>
+<span class="nc" id="L702">        }</span>
+<span class="nc" id="L703">    }</span>
+
+    private static void helperInputWandererFilter()
+    {
+    funcMainLoop:
+        while (true)
+        {
+<span class="nc" id="L710">            System.out.println(&quot;Masukan \&quot;x\&quot; untuk membatalkan aksi dan kembali ke menu.\n&quot;);</span>
+<span class="nc" id="L711">            System.out.println(&quot;1. Filter berdasarkan status&quot;);</span>
+<span class="nc" id="L712">            System.out.println(&quot;2. Filter berdasarkan rentang level&quot;);</span>
+
+<span class="nc" id="L714">            System.out.print(&quot;Masukan tipe filtering: &quot;);</span>
+<span class="nc" id="L715">            String option = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L717" title="All 2 branches missed.">            if (option.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L718">                break;</span>
+
+<span class="nc bnc" id="L720" title="All 2 branches missed.">            if (option.equals(&quot;1&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L724">                    System.out.print(&quot;Masukan status (kosong | dalam quest): &quot;);</span>
+<span class="nc" id="L725">                    String status = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L727" title="All 2 branches missed.">                    if (status.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L728">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L730" title="All 4 branches missed.">                    if (!status.equals(&quot;kosong&quot;) &amp;&amp; !status.equals(&quot;dalam quest&quot;))</span>
+<span class="nc" id="L731">                        System.out.println(&quot;Status tidak valid!&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L735">                        Wanderer[] filtered = HelperFilterWandererStatus(status);</span>
+
+<span class="nc" id="L737">                        helperShowWanderers(filtered, filtered.length);</span>
+<span class="nc" id="L738">                        break funcMainLoop;</span>
+                    }
+<span class="nc" id="L740">                }</span>
+            }
+
+<span class="nc bnc" id="L743" title="All 2 branches missed.">            else if (option.equals(&quot;2&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L747">                    System.out.print(&quot;Masukan batasan atas: &quot;);</span>
+<span class="nc" id="L748">                    String upper = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L750" title="All 2 branches missed.">                    if (upper.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L751">                        break funcMainLoop;</span>
+
+<span class="nc" id="L753">                    System.out.print(&quot;Masukan batasan bawah: &quot;);</span>
+<span class="nc" id="L754">                    String lower = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L756" title="All 2 branches missed.">                    if (lower.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L757">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L759" title="All 4 branches missed.">                    if (!upper.matches(&quot;\\d+&quot;) || !lower.matches(&quot;\\d+&quot;))</span>
+<span class="nc" id="L760">                        System.out.println(&quot;[!] Input harus berupa angka.&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L764">                        int upperInt = Integer.parseInt(upper);</span>
+<span class="nc" id="L765">                        int lowerInt = Integer.parseInt(lower);</span>
+
+<span class="nc bnc" id="L767" title="All 2 branches missed.">                        if (lowerInt &gt; upperInt)</span>
+<span class="nc" id="L768">                            System.out.println(&quot;[!] Batasan bawah tidak boleh lebih besar daripada batasan atas.&quot;);</span>
+
+                        else
+                        {
+<span class="nc" id="L772">                            Wanderer[] filtered = HelperFilterWandererLevel(upperInt, lowerInt);</span>
+
+<span class="nc" id="L774">                            helperShowWanderers(filtered, filtered.length);</span>
+<span class="nc" id="L775">                            break funcMainLoop;</span>
+                        }
+                    }
+<span class="nc" id="L778">                }</span>
+            }
+
+            else
+<span class="nc" id="L782">                System.out.println(&quot;Opsi tidak valid!&quot;);</span>
+<span class="nc" id="L783">        }</span>
+<span class="nc" id="L784">    }</span>
+
+    private static void helperInputQuestFilter()
+    {
+    funcMainLoop:
+        while (true)
+        {
+<span class="nc" id="L791">            System.out.println(&quot;Masukan \&quot;x\&quot; untuk membatalkan aksi dan kembali ke menu.\n&quot;);</span>
+
+<span class="nc" id="L793">            System.out.println(&quot;1. Filter berdasarkan status&quot;);</span>
+<span class="nc" id="L794">            System.out.println(&quot;2. Filter berdasarkan tingkat kesulitan&quot;);</span>
+
+<span class="nc" id="L796">            System.out.print(&quot;Masukan tipe filtering: &quot;);</span>
+<span class="nc" id="L797">            String option = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L799" title="All 2 branches missed.">            if (option.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L800">                break;</span>
+
+<span class="nc bnc" id="L802" title="All 2 branches missed.">            if (option.equals(&quot;1&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L806">                    System.out.print(&quot;Masukan status (tersedia | diambil | selesai): &quot;);</span>
+<span class="nc" id="L807">                    String status = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L809" title="All 2 branches missed.">                    if (status.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L810">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L812" title="All 6 branches missed.">                    if (!status.equals(&quot;tersedia&quot;) &amp;&amp; !status.equals(&quot;diambil&quot;) &amp;&amp; !status.equals(&quot;selesai&quot;))</span>
+<span class="nc" id="L813">                        System.out.println(&quot;Status tidak valid!&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L817">                        Quest[] filtered = HelperFilterQuestStatus(status);</span>
+
+<span class="nc" id="L819">                        helperShowQuests(filtered, filtered.length);</span>
+<span class="nc" id="L820">                        break funcMainLoop;</span>
+                    }
+<span class="nc" id="L822">                }</span>
+            }
+
+<span class="nc bnc" id="L825" title="All 2 branches missed.">            else if (option.equals(&quot;2&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L829">                    System.out.print(&quot;Masukan tingkat kesulitan (mudah | menengah | sulit): &quot;);</span>
+<span class="nc" id="L830">                    String diff = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L832" title="All 2 branches missed.">                    if (diff.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L833">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L835" title="All 6 branches missed.">                    if (!diff.equals(&quot;mudah&quot;) &amp;&amp; !diff.equals(&quot;menengah&quot;) &amp;&amp; !diff.equals(&quot;sulit&quot;))</span>
+<span class="nc" id="L836">                        System.out.println(&quot;Tingkat kesulitan tidak valid!&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L840">                        Quest[] filtered = HelperFilterQuestDifficulty(diff);</span>
+
+<span class="nc" id="L842">                        helperShowQuests(filtered, filtered.length);</span>
+<span class="nc" id="L843">                        break funcMainLoop;</span>
+                    }
+<span class="nc" id="L845">                }</span>
+            }
+
+            else
+<span class="nc" id="L849">                System.out.println(&quot;Opsi tidak valid!&quot;);</span>
+<span class="nc" id="L850">        }</span>
+<span class="nc" id="L851">    }</span>
+
+    private static void helperInputQuestSorting()
+    {
+    funcMainLoop:
+        while (true)
+        {
+<span class="nc" id="L858">            System.out.println(&quot;Masukan \&quot;x\&quot; untuk membatalkan aksi dan kembali ke menu.\n&quot;);</span>
+
+<span class="nc" id="L860">            System.out.println(&quot;1. Sorting berdasarkan tingkat kesulitan&quot;);</span>
+<span class="nc" id="L861">            System.out.println(&quot;2. Sorting berdasarkan reward&quot;);</span>
+
+<span class="nc" id="L863">            System.out.print(&quot;Masukan tipe sorting: &quot;);</span>
+<span class="nc" id="L864">            String option = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L866" title="All 2 branches missed.">            if (option.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L867">                break funcMainLoop;</span>
+
+<span class="nc bnc" id="L869" title="All 2 branches missed.">            if (option.equals(&quot;1&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L873">                    System.out.print(&quot;Urutan (asc | desc): &quot;);</span>
+<span class="nc" id="L874">                    String direction = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L876" title="All 2 branches missed.">                    if (direction.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L877">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L879" title="All 4 branches missed.">                    if (!direction.equals(&quot;asc&quot;) &amp;&amp; !direction.equals(&quot;desc&quot;))</span>
+<span class="nc" id="L880">                        System.out.println(&quot;[!] urutan tidak valid&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L884">                        Quest[] sorted = HelperSortQuestDifficulty(direction.equals(&quot;asc&quot;));</span>
+
+<span class="nc" id="L886">                        helperShowQuests(sorted, sorted.length);</span>
+<span class="nc" id="L887">                        break funcMainLoop;</span>
+                    }
+<span class="nc" id="L889">                }</span>
+            }
+
+<span class="nc bnc" id="L892" title="All 2 branches missed.">            else if (option.equals(&quot;2&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L896">                    System.out.print(&quot;Urutan (asc | desc): &quot;);</span>
+<span class="nc" id="L897">                    String direction = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L899" title="All 2 branches missed.">                    if (direction.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L900">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L902" title="All 4 branches missed.">                    if (!direction.equals(&quot;asc&quot;) &amp;&amp; !direction.equals(&quot;desc&quot;))</span>
+<span class="nc" id="L903">                        System.out.println(&quot;[!] urutan tidak valid&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L907">                        Quest[] sorted = HelperSortQuestReward(direction.equals(&quot;asc&quot;));</span>
+
+<span class="nc" id="L909">                        helperShowQuests(sorted, sorted.length);</span>
+<span class="nc" id="L910">                        break funcMainLoop;</span>
+                    }
+<span class="nc" id="L912">                }</span>
+            }
+
+            else
+<span class="nc" id="L916">                System.out.println(&quot;Opsi tidak valid!&quot;);</span>
+<span class="nc" id="L917">        }</span>
+<span class="nc" id="L918">    }</span>
+
+    private static void helperInputWandererSorting()
+    {
+    funcMainLoop:
+        while (true)
+        {
+<span class="nc" id="L925">            System.out.println(&quot;Masukan \&quot;x\&quot; untuk membatalkan aksi dan kembali ke menu.\n&quot;);</span>
+
+<span class="nc" id="L927">            System.out.println(&quot;1. Sorting berdasarkan nama&quot;);</span>
+<span class="nc" id="L928">            System.out.println(&quot;2. Sorting berdasarkan level&quot;);</span>
+
+<span class="nc" id="L930">            System.out.print(&quot;Masukan tipe sorting: &quot;);</span>
+<span class="nc" id="L931">            String option = input.nextLine().trim();</span>
+
+<span class="nc bnc" id="L933" title="All 2 branches missed.">            if (option.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L934">                break funcMainLoop;</span>
+
+<span class="nc bnc" id="L936" title="All 2 branches missed.">            if (option.equals(&quot;1&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L940">                    System.out.print(&quot;Urutan (asc | desc): &quot;);</span>
+<span class="nc" id="L941">                    String direction = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L943" title="All 2 branches missed.">                    if (direction.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L944">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L946" title="All 4 branches missed.">                    if (!direction.equals(&quot;asc&quot;) &amp;&amp; !direction.equals(&quot;desc&quot;))</span>
+<span class="nc" id="L947">                        System.out.println(&quot;[!] urutan tidak valid&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L951">                        Wanderer[] sorted = HelperSortWandererName(direction.equals(&quot;asc&quot;));</span>
+
+<span class="nc" id="L953">                        helperShowWanderers(sorted, sorted.length);</span>
+<span class="nc" id="L954">                        break funcMainLoop;</span>
+                    }
+<span class="nc" id="L956">                }</span>
+            }
+
+<span class="nc bnc" id="L959" title="All 2 branches missed.">            else if (option.equals(&quot;2&quot;))</span>
+            {
+                while (true)
+                {
+<span class="nc" id="L963">                    System.out.print(&quot;Urutan (asc | desc): &quot;);</span>
+<span class="nc" id="L964">                    String direction = input.nextLine().trim().toLowerCase();</span>
+
+<span class="nc bnc" id="L966" title="All 2 branches missed.">                    if (direction.toLowerCase().equals(&quot;x&quot;))</span>
+<span class="nc" id="L967">                        break funcMainLoop;</span>
+
+<span class="nc bnc" id="L969" title="All 4 branches missed.">                    if (!direction.equals(&quot;asc&quot;) &amp;&amp; !direction.equals(&quot;desc&quot;))</span>
+<span class="nc" id="L970">                        System.out.println(&quot;[!] urutan tidak valid&quot;);</span>
+
+                    else
+                    {
+<span class="nc" id="L974">                        Wanderer[] sorted = HelperSortWandererLevel(direction.equals(&quot;asc&quot;));</span>
+
+<span class="nc" id="L976">                        helperShowWanderers(sorted, sorted.length);</span>
+<span class="nc" id="L977">                        break funcMainLoop;</span>
+                    }
+<span class="nc" id="L979">                }</span>
+            }
+
+            else
+<span class="nc" id="L983">                System.out.println(&quot;Opsi tidak valid!&quot;);</span>
+<span class="nc" id="L984">        }</span>
+<span class="nc" id="L985">    }</span>
+
+    // sample subtask 7 :p
+    //clang-format off
+    public static void d()
+    {
+<span class="nc" id="L991">        gameManager.addWanderer(new Wanderer(6, new String(new char[] {83, 121, 97, 117, 113, 105}), new String(new char[] {115, 109, 121}), &quot;praktikum5siang&quot;, &quot;combat&quot;));</span>
+<span class="nc" id="L992">        gameManager.addWanderer(new Wanderer(7, new String(new char[] {83, 101, 97, 110, 32, 70, 97, 114, 114, 101, 108}), new String(new char[] {102, 97, 114}), new String(new char[] {112, 114, 97, 107, 116, 105, 107, 117, 109, 53, 115, 105, 97, 110, 103}), &quot;combat&quot;));</span>
+<span class="nc" id="L993">        gameManager.addWanderer(new Wanderer(8, new String(new char[] {65, 108, 119, 105, 101, 32, 65, 116, 116, 97, 114}), new String(new char[] {101, 108, 102}), new String(new char[] {112, 114, 97, 107, 116, 105, 107, 117, 109, 53, 115, 105, 97, 110, 103}), &quot;combat&quot;));</span>
+
+<span class="nc" id="L995">        gameManager.addPrisoner(new String(new char[] {115, 109, 121}), new String(new char[] {116, 101, 114, 100, 117, 103, 97, 32, 107, 111, 109, 112, 108, 111, 116, 97, 110, 32, 112, 101, 109, 98, 117, 97, 116, 32, 84, 80, 50}), 15);</span>
+<span class="nc" id="L996">        gameManager.addPrisoner(new String(new char[] {102, 97, 114}), new String(new char[] {116, 101, 114, 100, 117, 103, 97, 32, 107, 111, 109, 112, 108, 111, 116, 97, 110, 32, 112, 101, 109, 98, 117, 97, 116, 32, 84, 80, 50}), 15);</span>
+<span class="nc" id="L997">        gameManager.addPrisoner(new String(new char[] {101, 108, 102}), new String(new char[] {116, 101, 114, 100, 117, 103, 97, 32, 107, 111, 109, 112, 108, 111, 116, 97, 110, 32, 112, 101, 109, 98, 117, 97, 116, 32, 84, 80, 50}), 15);</span>
+        // no serious feeling heeheheheh
+<span class="nc" id="L999">    }</span>
+
+}
+//clang-format on
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

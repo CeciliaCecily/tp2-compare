@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Quest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Quest.java</span></div><h1>Quest.java</h1><pre class="source lang-java linenums">public class Quest
+{
+    private String id;
+    private String name;
+    private String description;
+    private String difficulty;
+    private String status;
+    private String assignedWandererId;
+    private int    reward;
+    private int    bonusExp;
+    private int    daysRequired;
+    private int    dayTaken;
+
+    private String type; // combat | gathering | diplomacy 
+
+    public Quest(
+        int idNumber, 
+        String name, 
+        String description, 
+        String difficulty, 
+        int reward, 
+        int bonusExp, 
+        int daysRequired, 
+        String type
+    )
+<span class="fc" id="L26">    {</span>
+<span class="fc" id="L27">        this.id                 = &quot;Q&quot; + idNumber;</span>
+<span class="fc" id="L28">        this.name               = name;</span>
+<span class="fc" id="L29">        this.description        = description;</span>
+<span class="fc" id="L30">        this.reward             = reward;</span>
+<span class="fc" id="L31">        this.bonusExp           = bonusExp;</span>
+<span class="fc" id="L32">        this.difficulty         = difficulty;</span>
+<span class="fc" id="L33">        this.daysRequired       = daysRequired;</span>
+<span class="fc" id="L34">        this.status             = &quot;tersedia&quot;;</span>
+<span class="fc" id="L35">        this.assignedWandererId = &quot;&quot;;</span>
+<span class="fc" id="L36">        this.dayTaken           = 0;</span>
+
+<span class="fc" id="L38">        this.type = type;</span>
+<span class="fc" id="L39">    }</span>
+
+<span class="fc" id="L41">    public String getId() { return this.id; }</span>
+<span class="fc" id="L42">    public String getName() { return this.name; }</span>
+<span class="fc" id="L43">    public String getDescription() { return this.description; }</span>
+<span class="fc" id="L44">    public String getDifficulty() { return this.difficulty; }</span>
+<span class="fc" id="L45">    public String getStatus() { return this.status; }</span>
+<span class="fc" id="L46">    public String getAssignedWandererId() { return this.assignedWandererId; }</span>
+<span class="fc" id="L47">    public int    getReward() { return this.reward; }</span>
+<span class="fc" id="L48">    public int    getBonusExp() { return this.bonusExp; }</span>
+<span class="fc" id="L49">    public int    getDaysRequired() { return this.daysRequired; }</span>
+<span class="fc" id="L50">    public int    getDayTaken() { return this.dayTaken; }</span>
+
+<span class="fc" id="L52">    public boolean isAvailable() { return this.status.equals(&quot;tersedia&quot;); }</span>
+<span class="fc" id="L53">    public boolean isTaken() { return this.status.equals(&quot;diambil&quot;); }</span>
+<span class="fc" id="L54">    public boolean isCompleted() { return this.status.equals(&quot;selesai&quot;); }</span>
+
+<span class="fc" id="L56">    public String getType() { return this.type; }</span>
+
+
+    public void assignTo(String wandererId, int daysCount)
+    {
+<span class="fc" id="L61">        this.assignedWandererId = wandererId;</span>
+<span class="fc" id="L62">        this.dayTaken           = daysCount;</span>
+<span class="fc" id="L63">        this.status             = &quot;diambil&quot;;</span>
+<span class="fc" id="L64">    }</span>
+
+    public void complete()
+    {
+<span class="fc" id="L68">        this.status = &quot;selesai&quot;;</span>
+<span class="fc" id="L69">    }</span>
+
+    public String getDisplayString()
+    {
+        // clang-format off
+<span class="fc" id="L74">        return </span>
+            &quot;ID quest:                &quot; + this.id             + &quot;\n&quot; +
+            &quot;Name quest:              &quot; + this.name           + &quot;\n&quot; +
+            &quot;Deskripsi quest:         &quot; + this.description    + &quot;\n&quot; +
+            &quot;Reward quest:            &quot; + this.reward         + &quot; koin\n&quot; +
+            &quot;Bonus experience quest:  &quot; + this.bonusExp       + &quot; poin exp\n&quot; +
+            &quot;Tingkat kesulitan quest: &quot; + this.difficulty     + &quot;\n&quot; +
+            &quot;Durasi quest:            &quot; + this.daysRequired   + &quot;\n&quot; +  
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">            &quot;Status quest:            &quot; + (String) (this.status.equals(&quot;diambil&quot;) ? (&quot;diambil oleh &quot; + this.assignedWandererId) : this.status) + &quot;\n&quot; +</span>
+            &quot;Tipe quest:              &quot; + this.type; 
+        // clang-format on
+    }
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L90">        return getDisplayString();</span>
+    }
+
+    public static String[] validateQuestInput(String name, String desc, String reward, String bonus, String diff, String duration, String type)
+    {
+<span class="nc" id="L95">        String[] temp  = new String[9];</span>
+<span class="nc" id="L96">        int      count = 0;</span>
+
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (name.isEmpty())</span>
+<span class="nc" id="L99">            temp[count++] = (&quot;Nama quest tidak boleh kosong&quot;);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (desc.isEmpty())</span>
+<span class="nc" id="L101">            temp[count++] = (&quot;Deskripsi quest tidak boleh kosong&quot;);</span>
+
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        if (!name.matches(&quot;^[A-Za-z0-9 ]+$&quot;))</span>
+<span class="nc" id="L104">            temp[count++] = (&quot;Nama quest hanya boleh alphanumerik dan spasi&quot;);</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (!desc.matches(&quot;^[A-Za-z0-9 ]+$&quot;))</span>
+<span class="nc" id="L106">            temp[count++] = (&quot;Deskripsi quest hanya boleh alphanumerik dan spasi&quot;);</span>
+
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (!reward.matches(&quot;\\d+&quot;))</span>
+<span class="nc" id="L109">            temp[count++] = (&quot;Reward harus bilangan bulat nonnegatif&quot;);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (!bonus.matches(&quot;\\d+&quot;))</span>
+<span class="nc" id="L111">            temp[count++] = (&quot;Bonus harus bilangan bulat nonnegatif&quot;);</span>
+
+<span class="nc bnc" id="L113" title="All 6 branches missed.">        if (!diff.equals(&quot;mudah&quot;) &amp;&amp; !diff.equals(&quot;menengah&quot;) &amp;&amp; !diff.equals(&quot;sulit&quot;))</span>
+<span class="nc" id="L114">            temp[count++] = (&quot;Tingkat kesulitan harus: mudah ATAU menengah ATAU sulit&quot;);</span>
+
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (!duration.matches(&quot;\\d+&quot;))</span>
+<span class="nc" id="L117">            temp[count++] = (&quot;Durasi harus bilangan bulat nonnegatif&quot;);</span>
+
+<span class="nc bnc" id="L119" title="All 6 branches missed.">        if (!type.equals(&quot;combat&quot;) &amp;&amp; !type.equals(&quot;gathering&quot;) &amp;&amp; !type.equals(&quot;diplomacy&quot;))</span>
+<span class="nc" id="L120">            temp[count++] = (&quot;Tipe quest harus: combat ATAU gathering ATAU diplomacy&quot;);</span>
+
+<span class="nc" id="L122">        String[] invalids = new String[count];</span>
+
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++)</span>
+<span class="nc" id="L125">            invalids[i] = temp[i];</span>
+
+<span class="nc" id="L127">        return invalids;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
