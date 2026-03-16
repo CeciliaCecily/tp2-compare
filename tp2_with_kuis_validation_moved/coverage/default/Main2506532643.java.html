@@ -576,7 +576,7 @@
 <span class="nc bnc" id="L576" title="All 2 branches missed.">            if (type.toLowerCase().equals(&quot;x&quot;))</span>
 <span class="nc" id="L577">                break;</span>
 
-<span class="nc" id="L579">            String[] invalids = Quest.validateQuestInput(name, desc, reward, bonus, difficulty, duration, type);</span>
+<span class="nc" id="L579">            String[] invalids = validateQuestInput(name, desc, reward, bonus, difficulty, duration, type);</span>
 
 <span class="nc bnc" id="L581" title="All 2 branches missed.">            if (invalids.length &gt; 0)</span>
             {
@@ -644,7 +644,7 @@
 <span class="nc bnc" id="L644" title="All 2 branches missed.">            if (specialization.toLowerCase().equals(&quot;x&quot;))</span>
 <span class="nc" id="L645">                break;</span>
 
-<span class="nc" id="L647">            String[] invalids = Wanderer.validateWandererInput(gameManager, name, username, password, specialization);</span>
+<span class="nc" id="L647">            String[] invalids = validateWandererInput(gameManager, name, username, password, specialization);</span>
 
 <span class="nc bnc" id="L649" title="All 2 branches missed.">            if (invalids.length &gt; 0)</span>
             {
@@ -998,6 +998,82 @@
         // no serious feeling heeheheheh
 <span class="nc" id="L999">    }</span>
 
+
+    /*****/
+
+    // Wanderer#validateQuestInput
+    public static String[] validateWandererInput(GameManager gm, String name, String username, String password, String specialization)
+    {
+<span class="nc" id="L1007">        String[] temp  = new String[7];</span>
+<span class="nc" id="L1008">        int      count = 0;</span>
+
+<span class="nc bnc" id="L1010" title="All 2 branches missed.">        if (name.isEmpty())</span>
+<span class="nc" id="L1011">            temp[count++] = (&quot;Nama pengembara tidak boleh kosong&quot;);</span>
+<span class="nc bnc" id="L1012" title="All 2 branches missed.">        if (!name.matches(&quot;^[a-zA-Z ]+$&quot;))</span>
+<span class="nc" id="L1013">            temp[count++] = (&quot;Nama pengembara hanya boleh terdiri dari huruf dan spasi&quot;);</span>
+<span class="nc bnc" id="L1014" title="All 2 branches missed.">        if (!name.matches(&quot;^([A-Z][a-z]*(\\s|$))+$&quot;))</span>
+<span class="nc" id="L1015">            temp[count++] = (&quot;Huruf kapital hanya boleh digunakan di awal setiap kata&quot;);</span>
+
+<span class="nc bnc" id="L1017" title="All 2 branches missed.">        if (username.isEmpty())</span>
+<span class="nc" id="L1018">            temp[count++] = (&quot;Username tidak boleh kosong&quot;);</span>
+<span class="nc bnc" id="L1019" title="All 2 branches missed.">        if (!username.matches(&quot;^[a-zA-Z0-9_]+$&quot;))</span>
+<span class="nc" id="L1020">            temp[count++] = (&quot;Username hanya boleh huruf, angka, dan underscore&quot;);</span>
+
+<span class="nc bnc" id="L1022" title="All 2 branches missed.">        if (password.isEmpty())</span>
+<span class="nc" id="L1023">            temp[count++] = (&quot;Password tidak boleh kosong&quot;);</span>
+
+<span class="nc bnc" id="L1025" title="All 2 branches missed.">        if (gm.getWandererByUsername(username) != null)</span>
+<span class="nc" id="L1026">            temp[count++] = (&quot;Username sudah pernah digunakan&quot;);</span>
+
+
+<span class="nc bnc" id="L1029" title="All 6 branches missed.">        if (!specialization.equals(&quot;combat&quot;) &amp;&amp; !specialization.equals(&quot;gathering&quot;) &amp;&amp; !specialization.equals(&quot;diplomacy&quot;))</span>
+<span class="nc" id="L1030">            temp[count++] = (&quot;Specialization pengembara harus: combat ATAU gathering ATAU diplomacy&quot;);</span>
+
+<span class="nc" id="L1032">        String[] invalids = new String[count];</span>
+
+<span class="nc bnc" id="L1034" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++)</span>
+<span class="nc" id="L1035">            invalids[i] = temp[i];</span>
+
+<span class="nc" id="L1037">        return invalids;</span>
+    }
+
+    // Quest#validateQuestInput
+    public static String[] validateQuestInput(String name, String desc, String reward, String bonus, String diff, String duration, String type)
+    {
+<span class="nc" id="L1043">        String[] temp  = new String[9];</span>
+<span class="nc" id="L1044">        int      count = 0;</span>
+
+<span class="nc bnc" id="L1046" title="All 2 branches missed.">        if (name.isEmpty())</span>
+<span class="nc" id="L1047">            temp[count++] = (&quot;Nama quest tidak boleh kosong&quot;);</span>
+<span class="nc bnc" id="L1048" title="All 2 branches missed.">        if (desc.isEmpty())</span>
+<span class="nc" id="L1049">            temp[count++] = (&quot;Deskripsi quest tidak boleh kosong&quot;);</span>
+
+<span class="nc bnc" id="L1051" title="All 2 branches missed.">        if (!name.matches(&quot;^[A-Za-z0-9 ]+$&quot;))</span>
+<span class="nc" id="L1052">            temp[count++] = (&quot;Nama quest hanya boleh alphanumerik dan spasi&quot;);</span>
+<span class="nc bnc" id="L1053" title="All 2 branches missed.">        if (!desc.matches(&quot;^[A-Za-z0-9 ]+$&quot;))</span>
+<span class="nc" id="L1054">            temp[count++] = (&quot;Deskripsi quest hanya boleh alphanumerik dan spasi&quot;);</span>
+
+<span class="nc bnc" id="L1056" title="All 2 branches missed.">        if (!reward.matches(&quot;\\d+&quot;))</span>
+<span class="nc" id="L1057">            temp[count++] = (&quot;Reward harus bilangan bulat nonnegatif&quot;);</span>
+<span class="nc bnc" id="L1058" title="All 2 branches missed.">        if (!bonus.matches(&quot;\\d+&quot;))</span>
+<span class="nc" id="L1059">            temp[count++] = (&quot;Bonus harus bilangan bulat nonnegatif&quot;);</span>
+
+<span class="nc bnc" id="L1061" title="All 6 branches missed.">        if (!diff.equals(&quot;mudah&quot;) &amp;&amp; !diff.equals(&quot;menengah&quot;) &amp;&amp; !diff.equals(&quot;sulit&quot;))</span>
+<span class="nc" id="L1062">            temp[count++] = (&quot;Tingkat kesulitan harus: mudah ATAU menengah ATAU sulit&quot;);</span>
+
+<span class="nc bnc" id="L1064" title="All 2 branches missed.">        if (!duration.matches(&quot;\\d+&quot;))</span>
+<span class="nc" id="L1065">            temp[count++] = (&quot;Durasi harus bilangan bulat nonnegatif&quot;);</span>
+
+<span class="nc bnc" id="L1067" title="All 6 branches missed.">        if (!type.equals(&quot;combat&quot;) &amp;&amp; !type.equals(&quot;gathering&quot;) &amp;&amp; !type.equals(&quot;diplomacy&quot;))</span>
+<span class="nc" id="L1068">            temp[count++] = (&quot;Tipe quest harus: combat ATAU gathering ATAU diplomacy&quot;);</span>
+
+<span class="nc" id="L1070">        String[] invalids = new String[count];</span>
+
+<span class="nc bnc" id="L1072" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++)</span>
+<span class="nc" id="L1073">            invalids[i] = temp[i];</span>
+
+<span class="nc" id="L1075">        return invalids;</span>
+    }
 }
 //clang-format on
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
