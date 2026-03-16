@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">GameManager.java</span></div><h1>GameManager.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">public class GameManager</span>
+{
+<span class="fc" id="L3">    private Quest[]    quests        = new Quest[1000];</span>
+<span class="fc" id="L4">    private Wanderer[] wanderers     = new Wanderer[1000];</span>
+<span class="fc" id="L5">    private int        questCount    = 0;</span>
+<span class="fc" id="L6">    private int        wandererCount = 0;</span>
+<span class="fc" id="L7">    private int        daysCount     = 1;</span>
+
+<span class="fc" id="L9">    public Quest[]    getQuests() { return quests; }</span>
+<span class="fc" id="L10">    public Wanderer[] getWanderers() { return wanderers; }</span>
+<span class="fc" id="L11">    public int        getQuestCount() { return questCount; }</span>
+<span class="fc" id="L12">    public int        getWandererCount() { return wandererCount; }</span>
+<span class="fc" id="L13">    public int        getDaysCount() { return daysCount; }</span>
+
+    /**
+     *  subtask 7 :3
+     *  penjara untuk user yang nakal.
+     *  niatnya bisa dibebasin tapi keknya ga cukup waktu --05:19, 13/03/2026
+     */
+<span class="fc" id="L20">    private String[][] prisoners     = new String[1000][4];</span>
+<span class="fc" id="L21">    private int        prisonerCount = 0;</span>
+
+    public void addPrisoner(String username, String reason, int duration)
+    {
+<span class="nc" id="L25">        prisoners[prisonerCount][0] = username;</span>
+<span class="nc" id="L26">        prisoners[prisonerCount][1] = reason;</span>
+<span class="nc" id="L27">        prisoners[prisonerCount][2] = String.valueOf(duration);</span>
+<span class="nc" id="L28">        prisoners[prisonerCount][3] = String.valueOf(getDaysCount());</span>
+
+<span class="nc" id="L30">        prisonerCount++;</span>
+<span class="nc" id="L31">    }</span>
+
+<span class="fc" id="L33">    public int        getPrisonerCount() { return prisonerCount; }</span>
+<span class="fc" id="L34">    public String[][] getPrisoners() { return prisoners; }</span>
+
+    public String[] getPrisonerByUsername(String username)
+    {
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        for (int i = 0; i &lt; prisonerCount; i++)</span>
+        {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">            if (prisoners[i][0].equalsIgnoreCase(username))</span>
+<span class="nc" id="L41">                return prisoners[i];</span>
+        }
+
+<span class="fc" id="L44">        return null;</span>
+    }
+
+    public boolean isPrisoner(String username)
+    {
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (int i = 0; i &lt; prisonerCount; i++)</span>
+        {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (prisoners[i][0].equalsIgnoreCase(username))</span>
+<span class="nc" id="L52">                return true;</span>
+        }
+
+<span class="nc" id="L55">        return false;</span>
+    }
+
+    /***************************/
+
+    public Wanderer getWandererByUsername(String username)
+    {
+<span class="pc bfc" id="L62" title="All 2 branches covered.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            if (this.wanderers[i].getUsername().equalsIgnoreCase(username.toLowerCase()))</span>
+<span class="fc" id="L65">                return this.wanderers[i];</span>
+        }
+
+<span class="fc" id="L68">        return null;</span>
+    }
+
+    public Wanderer getWandererById(String id)
+    {
+<span class="pc bfc" id="L73" title="All 2 branches covered.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">            if (this.wanderers[i].getId().equalsIgnoreCase(id.toLowerCase()))</span>
+<span class="fc" id="L76">                return this.wanderers[i];</span>
+        }
+
+<span class="fc" id="L79">        return null;</span>
+    }
+
+    public Quest getQuestById(String id)
+    {
+<span class="pc bfc" id="L84" title="All 2 branches covered.">        for (int i = 0; i &lt; questCount; i++)</span>
+        {
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">            if (this.quests[i].getId().equalsIgnoreCase(id))</span>
+<span class="fc" id="L87">                return this.quests[i];</span>
+        }
+
+<span class="fc" id="L90">        return null;</span>
+    }
+
+    public boolean isAdmin(String username, String password)
+    {
+<span class="fc bfc" id="L95" title="All 4 branches covered.">        return username.equals(&quot;burhan&quot;) &amp;&amp; password.equals(&quot;burunghantu123&quot;);</span>
+    }
+
+    public boolean isUser(String username, String password)
+    {
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (int i = 0; i &lt; wandererCount; i++)</span>
+        {
+<span class="fc bfc" id="L102" title="All 2 branches covered.">            if (this.wanderers[i].authenticate(username, password))</span>
+<span class="fc" id="L103">                return true;</span>
+        }
+
+<span class="fc" id="L106">        return false;</span>
+    }
+
+    public Quest[] nextDay()
+    {
+<span class="fc" id="L111">        daysCount++;</span>
+
+<span class="fc" id="L113">        Quest[] completed       = new Quest[100];</span>
+<span class="fc" id="L114">        int     completedLength = 0;</span>
+
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        for (int i = 0; i &lt; questCount; i++)</span>
+        {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (this.quests[i].getStatus().equals(&quot;diambil&quot;))</span>
+            {
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">                if (daysCount &gt;= (quests[i].getDayTaken() + quests[i].getDaysRequired()))</span>
+                {
+<span class="fc" id="L122">                    quests[i].complete();</span>
+
+<span class="fc" id="L124">                    Wanderer wanderer = getWandererById(quests[i].getAssignedWandererId());</span>
+
+<span class="fc" id="L126">                    wanderer.completeQuest(quests[i].getBonusExp(), quests[i].getReward());</span>
+
+<span class="fc" id="L128">                    completed[completedLength++] = quests[i];</span>
+                }
+            }
+        }
+
+<span class="fc" id="L133">        return completed;</span>
+    }
+
+    public void addQuest(Quest quest)
+    {
+<span class="fc" id="L138">        quests[questCount++] = quest;</span>
+<span class="fc" id="L139">    }</span>
+
+    public void addWanderer(Wanderer wanderer)
+    {
+<span class="fc" id="L143">        wanderers[wandererCount++] = wanderer;</span>
+<span class="fc" id="L144">    }</span>
+
+    public boolean takeQuest(Quest quest, Wanderer wanderer)
+    {
+<span class="pc bpc" id="L148" title="2 of 4 branches missed.">        if (quest == null || wanderer == null)</span>
+<span class="nc" id="L149">            return false;</span>
+    
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        if (!wanderer.canTakeQuest(quest))</span>
+<span class="fc" id="L152">            return false;</span>
+
+        else
+        {
+<span class="fc" id="L156">            quest.assignTo(wanderer.getId(), daysCount);</span>
+<span class="fc" id="L157">            wanderer.startQuest();</span>
+
+<span class="fc" id="L159">            return true;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
