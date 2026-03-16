@@ -89,41 +89,4 @@ public class Quest
     {
         return getDisplayString();
     }
-
-    public static String[] validateQuestInput(String name, String desc, String reward, String bonus, String diff, String duration, String type)
-    {
-        String[] temp  = new String[9];
-        int      count = 0;
-
-        if (name.isEmpty())
-            temp[count++] = ("Nama quest tidak boleh kosong");
-        if (desc.isEmpty())
-            temp[count++] = ("Deskripsi quest tidak boleh kosong");
-
-        if (!name.matches("^[A-Za-z0-9 ]+$"))
-            temp[count++] = ("Nama quest hanya boleh alphanumerik dan spasi");
-        if (!desc.matches("^[A-Za-z0-9 ]+$"))
-            temp[count++] = ("Deskripsi quest hanya boleh alphanumerik dan spasi");
-
-        if (!reward.matches("\\d+"))
-            temp[count++] = ("Reward harus bilangan bulat nonnegatif");
-        if (!bonus.matches("\\d+"))
-            temp[count++] = ("Bonus harus bilangan bulat nonnegatif");
-
-        if (!diff.equals("mudah") && !diff.equals("menengah") && !diff.equals("sulit"))
-            temp[count++] = ("Tingkat kesulitan harus: mudah ATAU menengah ATAU sulit");
-
-        if (!duration.matches("\\d+"))
-            temp[count++] = ("Durasi harus bilangan bulat nonnegatif");
-
-        if (!type.equals("combat") && !type.equals("gathering") && !type.equals("diplomacy"))
-            temp[count++] = ("Tipe quest harus: combat ATAU gathering ATAU diplomacy");
-
-        String[] invalids = new String[count];
-
-        for (int i = 0; i < count; i++)
-            invalids[i] = temp[i];
-
-        return invalids;
-    }
 }

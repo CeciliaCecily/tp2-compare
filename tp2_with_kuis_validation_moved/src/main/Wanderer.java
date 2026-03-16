@@ -117,39 +117,4 @@ public class Wanderer
     {
         return getDisplayString();
     }
-
-    public static String[] validateWandererInput(GameManager gm, String name, String username, String password, String specialization)
-    {
-        String[] temp  = new String[7];
-        int      count = 0;
-
-        if (name.isEmpty())
-            temp[count++] = ("Nama pengembara tidak boleh kosong");
-        if (!name.matches("^[a-zA-Z ]+$"))
-            temp[count++] = ("Nama pengembara hanya boleh terdiri dari huruf dan spasi");
-        if (!name.matches("^([A-Z][a-z]*(\\s|$))+$"))
-            temp[count++] = ("Huruf kapital hanya boleh digunakan di awal setiap kata");
-
-        if (username.isEmpty())
-            temp[count++] = ("Username tidak boleh kosong");
-        if (!username.matches("^[a-zA-Z0-9_]+$"))
-            temp[count++] = ("Username hanya boleh huruf, angka, dan underscore");
-
-        if (password.isEmpty())
-            temp[count++] = ("Password tidak boleh kosong");
-
-        if (gm.getWandererByUsername(username) != null)
-            temp[count++] = ("Username sudah pernah digunakan");
-
-
-        if (!specialization.equals("combat") && !specialization.equals("gathering") && !specialization.equals("diplomacy"))
-            temp[count++] = ("Specialization pengembara harus: combat ATAU gathering ATAU diplomacy");
-
-        String[] invalids = new String[count];
-
-        for (int i = 0; i < count; i++)
-            invalids[i] = temp[i];
-
-        return invalids;
-    }
 }
